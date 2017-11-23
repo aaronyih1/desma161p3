@@ -1,5 +1,6 @@
       var pubKey = config.PUB_KEY;
       var subKey = config.SUB_KEY;
+      var overallSentimentScore = 0;
       // Create PubNub Socket Handler
       const pubnub = new PubNub({
           publishKey   : 'empty'
@@ -28,7 +29,7 @@
           var msg = m.message;
 
           // We are filtering tweets based on Trump, trump, or any capitilization of POTUS
-          if (msg.text.match(/([T|t]rump|[P|p][O|o][T|t][U|u][S|s])/g)) {
+          if (sortPeople(msg)) {
             session_Id++;
             // Where we publish tweets for sentiment analysis
             var publishConfig = {
@@ -49,7 +50,7 @@
         message: function(m) {
           //console.log(m);
           var msg = m.message;
-          //console.log(m);
+          //console.log(msg);
           processData(msg);
         }
       //     status  : statusEvent => console.log(statusEvent)
@@ -57,5 +58,7 @@
       });
       function processData(data) {
         //console.log(data);
+        overallSentimentScore += data.score;
         document.querySelector('#feed').innerHTML = data.text;
+        document.querySelector('#sentiment-score').innerHTML = data.score;
       }
