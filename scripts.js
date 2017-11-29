@@ -13,7 +13,6 @@
         publishKey: pubKey,
         subscribeKey: subKey,
       })
-
       // Subscribe to Twitter feed
       console.log("Subscribing to Live Twitter Stream.");
       pubnub.subscribe({ channels: ['pubnub-twitter'] });
@@ -50,7 +49,7 @@
         message: function(m) {
           //console.log(m);
           var msg = m.message;
-          //console.log(msg);
+          console.log(msg);
           processData(msg);
         }
       //     status  : statusEvent => console.log(statusEvent)
