@@ -48,7 +48,8 @@ var getNthWord = function(string, n){
 
 function populatePage() {
 	$( document ).ready(function() {
-		for(var i = 1; i<people.; i++){
+		console.log(twitterHandles.length);
+		for(var i = 1; i<twitterHandles.length; i++){
 			//console.log(twitterHandles[i-1]);
 			var newPerson = new Person(twitterHandles[i-1]);
 			//console.log(newPerson);
@@ -57,7 +58,7 @@ function populatePage() {
 				$('#doll-grid').append("<tr class='table-row'></tr>");
 			}
 			console.log(people[i-1]);
-			$('.table-row:last-child').append("<img src='imgs/voodoo.png' style='width:200px;' /> <p>"+people[i-1].twitterhandle+"</p>");
+			$('.table-row:last-child').append("<td><img src='imgs/voodoo.png' style='width:200px;' /> <p>"+people[i-1].twitterhandle+"</p></td>");
 		}
 	});
 }
