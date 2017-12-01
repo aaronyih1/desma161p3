@@ -1,6 +1,7 @@
 var people = [];
-var twitterHandles = ["katyperry", "justinbieber", "barackobama", "taylorswift13", "rihanna", "theellenshow", "ladygaga", "youtube", "cristiano", "jtimberlake", "twitter", "kimkardashian", "britneyspears", "arianagrande", "selenagomez", "cnnbrk", "ddlovato", ""];
-
+var twitterHandles = ["katyperry", "justinbieber", "barackobama", "taylorswift13", "rihanna", "theellenshow", "ladygaga", "youtube", "cristiano", "jtimberlake", "twitter", "kimkardashian", "britneyspears", "arianagrande", "selenagomez", "cnnbrk", "ddlovato", "trump", "Trump", "POTUS"];
+var condition = "";
+peopleConcat();
 // var firstNames = ["katy", "justin", "barackobama", "taylorswift13", "rihanna", "theellenshow", "ladygaga", "youtube", "cristiano", "jtimberlake", "twitter", "kimkardashian", "britneyspears", "arianagrande", "selenagomez", "cnnbrk", "ddlovato", ""];
 // var selectedPerson = "voodoo";
 // var REContainer = new RegExp(selectedPerson);
@@ -16,16 +17,33 @@ var twitterHandles = ["katyperry", "justinbieber", "barackobama", "taylorswift13
 // });
 populatePage();
 
-function Person(twitterhandle){
+function Person(twitterhandle, tweets){
 	// this.firstname = firstname;
 	// this.lastname = lastname;
 	this.twitterhandle = twitterhandle;
+	this.tweets = [];
+
 }
 
 function sortPeople(data){
+	 //console.log(data);
 	//console.log(REContainer);
 	// var newSrc = 'imgs/'+selectedPerson+'.jpg';
 	// $('#dollImg').attr('src', newSrc);
+	// for(var i = 0; i<twitterHandles.length;i++){
+	// 	console.log(twitterHandles[i]);
+	// 	if(data.text.match(peopleConcat())){
+	// 		return(true);
+	// 	}
+	// 	else
+	// 		return(false);
+	// }
+	//console.log(peopleConcat());
+	if(data.text.match(condition)){
+		return(true);
+	}
+	else
+		return(false);
 	// if(data.text.match(/([T|t]rump|[P|p][O|o][T|t][U|u][S|s])/g)){
 	// 	return(true);
 	// }
@@ -45,6 +63,22 @@ var getNthWord = function(string, n){
     var words = string.split(" ");
     return words[n-1];
 }
+function addToPerson(msg){
+	for(var i = 0; i < people.length; i++){
+		if (msg.text.match(people[i].twitterhandle)){
+			people[i].tweets.push(msg);
+			//console.log(people[i]);
+			updateSentiment(msg,i);
+		}
+	}
+}
+function updateSentiment(msg,i){
+	console.log("THIS IS PEOPLE " + people[i].twitterhandle);
+	$('#'+people[i].twitterhandle).append("<img src='imgs/pin.png' />");
+	// for(var j = 0; j<people[i].length; j++){
+	// 	$('"#'+people[i].twitterhandle+'"').append("<li>woooo</li>");
+	// }
+}
 
 function populatePage() {
 	$( document ).ready(function() {
@@ -58,7 +92,21 @@ function populatePage() {
 				$('#doll-grid').append("<tr class='table-row'></tr>");
 			}
 			console.log(people[i-1]);
-			$('.table-row:last-child').append("<td><img src='imgs/voodoo.png' style='width:200px;' /> <p>"+people[i-1].twitterhandle+"</p></td>");
+			$('.table-row:last-child').append("<td><img src='imgs/voodoo.png' style='width:200px;' /> <p>"+people[i-1].twitterhandle+"</p><ul id='"+people[i-1].twitterhandle+"'></ul></td>");
 		}
 	});
+}
+function peopleConcat(){
+	//var f = 0;
+	for(var i = 0; i<twitterHandles.length;i++){
+		//console.log(twitterHandles[i]);
+		condition += twitterHandles[i] + "|";
+		// if((i == twitterHandles.length-1)){
+		// 	condition += "|";
+		// }
+
+	}
+	condition = condition.substring(0,condition.length-1);
+	console.log(condition);
+	return(condition);
 }

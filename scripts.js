@@ -26,6 +26,7 @@
         message: function(m) {
           //console.log(m);
           var msg = m.message;
+          //console.log(msg);
 
           // We are filtering tweets based on Trump, trump, or any capitilization of POTUS
           if (sortPeople(msg)) {
@@ -36,6 +37,7 @@
               message : {"session_id":session_Id,"text":msg.text, "sentiment":msg.session_sentiment }
             }
             //console.log(msg.text);
+            addToPerson(msg);
             pubnubPersonal.publish(publishConfig, function(status, response) {
               if (status.error) {
                 console.log(status, response);
