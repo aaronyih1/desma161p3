@@ -77,10 +77,10 @@ function updateSentiment(msg,i){
 	$('#'+people[i].twitterhandle).empty();
 	for(var f = 0; f < people[i].tweets.length; f++){
 		if(people[i].tweets[f].score < 0){
-			$('#'+people[i].twitterhandle).append("<img style='width:30px;' src='imgs/pin.png' />");
+			$('#'+people[i].twitterhandle).append("<li><img style='width:30px;' src='imgs/pin.png' /></li>");
 		}
 		else if(people[i].tweets[f].score > 0){
-			$('#'+people[i].twitterhandle).append("<img style='width:30px;' src='imgs/heart.png' />");
+			$('#'+people[i].twitterhandle).append("<li><img style='width:30px;' src='imgs/heart.png' /></li>");
 		}
 	}
 	//console.log("THIS IS PEOPLE " + people[i].twitterhandle);

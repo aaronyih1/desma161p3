@@ -59,7 +59,7 @@
       });
       function processData(data) {
         //console.log(data);
-        overallSentimentScore += data.score;
+        // overallSentimentScore += data.score;
         document.querySelector('#feed').innerHTML = data.text;
-        document.querySelector('#sentiment-score').innerHTML = data.score;
+        // document.querySelector('#sentiment-score').innerHTML = data.score;
       }
