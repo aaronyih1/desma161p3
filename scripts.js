@@ -37,7 +37,6 @@
               message : {"session_id":session_Id,"text":msg.text, "sentiment":msg.session_sentiment }
             }
             //console.log(msg.text);
-            addToPerson(msg);
             pubnubPersonal.publish(publishConfig, function(status, response) {
               if (status.error) {
                 console.log(status, response);
@@ -51,7 +50,8 @@
         message: function(m) {
           //console.log(m);
           var msg = m.message;
-          console.log(msg);
+          //console.log(msg);
+          addToPerson(msg);
           processData(msg);
         }
       //     status  : statusEvent => console.log(statusEvent)

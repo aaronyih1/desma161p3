@@ -73,8 +73,18 @@ function addToPerson(msg){
 	}
 }
 function updateSentiment(msg,i){
-	console.log("THIS IS PEOPLE " + people[i].twitterhandle);
-	$('#'+people[i].twitterhandle).append("<img src='imgs/pin.png' />");
+	console.log(msg);
+	$('#'+people[i].twitterhandle).empty();
+	for(var f = 0; f < people[i].tweets.length; f++){
+		if(people[i].tweets[f].score < 0){
+			$('#'+people[i].twitterhandle).append("<img style='width:30px;' src='imgs/pin.png' />");
+		}
+		else if(people[i].tweets[f].score > 0){
+			$('#'+people[i].twitterhandle).append("<img style='width:30px;' src='imgs/heart.png' />");
+		}
+	}
+	//console.log("THIS IS PEOPLE " + people[i].twitterhandle);
+	
 	// for(var j = 0; j<people[i].length; j++){
 	// 	$('"#'+people[i].twitterhandle+'"').append("<li>woooo</li>");
 	// }
