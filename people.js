@@ -80,7 +80,11 @@ function updateSentiment(msg,i){
 			$('#'+people[i].twitterhandle).append("<li><img style='width:30px;' src='imgs/pin.png' /></li>");
 		}
 		else if(people[i].tweets[f].score > 0){
-			$('#'+people[i].twitterhandle).append("<li><img style='width:30px;' src='imgs/heart.png' /></li>");
+			//console.log(people[i].tweets[f].score);
+			//$('body').css("background-color", "red");
+			$('#'+people[i].twitterhandle+'heart').css("transform", 'scale('+people[i].tweets[f].score.map(0,10, 0.5, 1.5)+','+people[i].tweets[f].score.map(0,10, 0.5, 1.5)+')');
+			//$('#'+people[i].twitterhandle+'heart').css("width", '"'+50*people[i].tweets[f].score+'px !important"');
+			//$('#'+people[i].twitterhandle+'container').append("<img style='position: relative; right:0px; bottom:270px; width:50px;' src='imgs/heart.png' />");
 		}
 	}
 	//console.log("THIS IS PEOPLE " + people[i].twitterhandle);
@@ -102,7 +106,7 @@ function populatePage() {
 				$('#doll-grid').append("<tr class='table-row'></tr>");
 			}
 			console.log(people[i-1]);
-			$('.table-row:last-child').append("<td><img src='imgs/voodoo.png' style='width:200px;' /> <p>"+people[i-1].twitterhandle+"</p><ul id='"+people[i-1].twitterhandle+"'></ul></td>");
+			$('.table-row:last-child').append("<td id='"+people[i-1].twitterhandle+"container'><img src='imgs/voodoo.png' style='width:200px;' /><img id='"+people[i-1].twitterhandle+"heart' style='position: relative; right:125px; bottom:140px; width:50px;' src='imgs/heart.png' /> <p>"+people[i-1].twitterhandle+"</p><ul id='"+people[i-1].twitterhandle+"'></ul></td>");
 		}
 	});
 }
@@ -119,4 +123,7 @@ function peopleConcat(){
 	condition = condition.substring(0,condition.length-1);
 	console.log(condition);
 	return(condition);
+}
+Number.prototype.map = function (in_min, in_max, out_min, out_max) {
+  return (this - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
