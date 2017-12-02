@@ -17,12 +17,17 @@ peopleConcat();
 // });
 populatePage();
 
-function Person(twitterhandle, tweets){
+function Person(twitterhandle, tweets, pins){
 	// this.firstname = firstname;
 	// this.lastname = lastname;
 	this.twitterhandle = twitterhandle;
 	this.tweets = [];
+	this.pins =[];
 
+}
+function Pin(position, rotation){
+	this.position=position;
+	this.rotation=rotation;
 }
 
 function sortPeople(data){
@@ -73,30 +78,45 @@ function addToPerson(msg){
 	}
 }
 function updateSentiment(msg,i){
-	//console.log(msg);
-	$('#'+people[i].twitterhandle).empty();
-	var counter=0;
-	for(var f = 0; f < people[i].tweets.length; f++){
-		if(people[i].tweets[f].score < 0){
-			counter++;
-			$('#'+people[i].twitterhandle).append("<li><img id='"+people[i].twitterhandle+"pins"+counter+"' style='-ms-transform-origin: 100% 100%; -webkit-transform-origin: 100% 100%; transform-origin: 100% 100%; width:50px; position: relative;"+positionPins(counter, people[i])+"' src='imgs/pin.png' /></li>");
-			//$("#"+people[i].twitterhandle+"pins"+counter).css("transform", "rotate("+Math.random()*360+"deg)");
+		if(people[i].tweets[people[i].tweets.length-1].score < 0){
+			var pinHolder = new Pin(people[i].pins.length, Math.random()*360)
+			people[i].pins.push(pinHolder);
+			renderPins(i);
 		}
-		else if(people[i].tweets[f].score > 0){
+		else if(people[i].tweets[people[i].tweets.length-1].score  > 0){
 			//console.log(people[i].tweets[f].score);
 			//$('body').css("background-color", "red");
-			$('#'+people[i].twitterhandle+'heart').css("transform", 'scale('+people[i].tweets[f].score.map(0,10, 1, 2.5)+','+people[i].tweets[f].score.map(0,10, 1, 2.5)+')');
+			$('#'+people[i].twitterhandle+'heart').css("transform", 'scale('+people[i].tweets[people[i].tweets.length-1].score.map(0,10, 1, 2.5)+','+people[i].tweets[people[i].tweets.length-1].score.map(0,10, 1, 2.5)+')');
 			//$('#'+people[i].twitterhandle+'heart').css("width", '"'+50*people[i].tweets[f].score+'px !important"');
 			//$('#'+people[i].twitterhandle+'container').append("<img style='position: relative; right:0px; bottom:270px; width:50px;' src='imgs/heart.png' />");
 		}
-	}
+	//console.log(msg);
+	// $('#'+people[i].twitterhandle).empty();
+	// var counter=0;
+	// for(var f = 0; f < people[i].tweets.length; f++){
+	// 	if(people[i].tweets[f].score < 0){
+	// 		counter++;
+	// 		$('#'+people[i].twitterhandle).append("<li><img id='"+people[i].twitterhandle+"pins"+counter+"' style='-ms-transform-origin: 100% 100%; -webkit-transform-origin: 100% 100%; transform-origin: 100% 100%; width:50px; position: relative;"+positionPins(counter, people[i])+"' src='imgs/pin.png' /></li>");
+	// 		//$("#"+people[i].twitterhandle+"pins"+counter).css("transform", "rotate("+Math.random()*360+"deg)");
+	// 	}
+	// 	else if(people[i].tweets[f].score > 0){
+	// 		//console.log(people[i].tweets[f].score);
+	// 		//$('body').css("background-color", "red");
+	// 		$('#'+people[i].twitterhandle+'heart').css("transform", 'scale('+people[i].tweets[f].score.map(0,10, 1, 2.5)+','+people[i].tweets[f].score.map(0,10, 1, 2.5)+')');
+	// 		//$('#'+people[i].twitterhandle+'heart').css("width", '"'+50*people[i].tweets[f].score+'px !important"');
+	// 		//$('#'+people[i].twitterhandle+'container').append("<img style='position: relative; right:0px; bottom:270px; width:50px;' src='imgs/heart.png' />");
+	// 	}
+	// }
 	//console.log("THIS IS PEOPLE " + people[i].twitterhandle);
 	
 	// for(var j = 0; j<people[i].length; j++){
 	// 	$('"#'+people[i].twitterhandle+'"').append("<li>woooo</li>");
 	// }
 }
-
+function renderPins(i){
+	console.log(people[i].pins);
+	$('#'+people[i].twitterhandle).append("<li><img id='"+people[i].twitterhandle+"pins' style='-ms-transform-origin: 100% 100%; -webkit-transform-origin: 100% 100%; transform-origin: 100% 100%; width:50px; "+"transform:rotate("+people[i].pins[people[i].pins.length-1].rotation+"deg);"+"position: relative;"+positionPins(people[i].pins[people[i].pins.length-1].position, i)+"' src='imgs/pin.png' /></li>");
+}
 function populatePage() {
 	$( document ).ready(function() {
 		console.log(twitterHandles.length);
@@ -115,10 +135,13 @@ function populatePage() {
 		}
 	});
 }
-function positionPins(pins, person){
+function positionPins(pins, i){
 		//console.log(pins);
 		console.log(pins);
 		switch (pins){
+			case 0: 
+			return("left:0px; bottom:360px;");
+			break;
 			case 1: 
 			//$("#Trumppins").css("transform", "rotate(90deg)");
 			// $("#Trumppins").css("width", "200px");
@@ -137,12 +160,9 @@ function positionPins(pins, person){
 			case 5: 
 			return("left:-20px; bottom:320px;");
 			break;
-			case 6: 
-			return("left:0px; bottom:360px;");
-			break;
 			default:
-			$('#extrapincount').remove();
-			$('#'+person.twitterhandle+'container').append("<div id='extrapincount'><img style='width:30px;' src='imgs/pin.png' /><p>+"+(pins-6)+"</p></div>");
+			$('#'+people[i].twitterhandle+'container '+'.extrapincount').remove();
+			$('#'+people[i].twitterhandle+'container').append("<div class='extrapincount'><img style='width:30px;' src='imgs/pin.png' /><p>+"+(pins-5)+"</p></div>");
 			return("display:none;");
 		}
 }
