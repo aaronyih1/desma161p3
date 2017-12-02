@@ -75,14 +75,16 @@ function addToPerson(msg){
 function updateSentiment(msg,i){
 	console.log(msg);
 	$('#'+people[i].twitterhandle).empty();
+	var counter=0;
 	for(var f = 0; f < people[i].tweets.length; f++){
 		if(people[i].tweets[f].score < 0){
-			$('#'+people[i].twitterhandle).append("<li><img style='width:30px;' src='imgs/pin.png' /></li>");
+			counter++;
+			$('#'+people[i].twitterhandle).append("<li><img style='width:30px; position: relative;"+positionPins(counter)+"' src='imgs/pin.png' /></li>");
 		}
 		else if(people[i].tweets[f].score > 0){
 			//console.log(people[i].tweets[f].score);
 			//$('body').css("background-color", "red");
-			$('#'+people[i].twitterhandle+'heart').css("transform", 'scale('+people[i].tweets[f].score.map(0,10, 0.5, 1.5)+','+people[i].tweets[f].score.map(0,10, 0.5, 1.5)+')');
+			$('#'+people[i].twitterhandle+'heart').css("transform", 'scale('+people[i].tweets[f].score.map(0,10, 1, 2.5)+','+people[i].tweets[f].score.map(0,10, 1, 2.5)+')');
 			//$('#'+people[i].twitterhandle+'heart').css("width", '"'+50*people[i].tweets[f].score+'px !important"');
 			//$('#'+people[i].twitterhandle+'container').append("<img style='position: relative; right:0px; bottom:270px; width:50px;' src='imgs/heart.png' />");
 		}
@@ -106,9 +108,25 @@ function populatePage() {
 				$('#doll-grid').append("<tr class='table-row'></tr>");
 			}
 			console.log(people[i-1]);
-			$('.table-row:last-child').append("<td id='"+people[i-1].twitterhandle+"container'><img src='imgs/voodoo.png' style='width:200px;' /><img id='"+people[i-1].twitterhandle+"heart' style='position: relative; right:125px; bottom:140px; width:50px;' src='imgs/heart.png' /> <p>"+people[i-1].twitterhandle+"</p><ul id='"+people[i-1].twitterhandle+"'></ul></td>");
+			$('.table-row:last-child').append("<td id='"+people[i-1].twitterhandle+"container'><img src='imgs/voodoo.png' style='width:200px; display:block; margin:0 auto;' /><img id='"+people[i-1].twitterhandle+"heart' style='position: relative; right:0px; bottom:190px; width:30px;' src='imgs/heart.png' /> <p>"+people[i-1].twitterhandle+"</p><ul id='"+people[i-1].twitterhandle+"'></ul></td>");
+			// $('.table-row:last-child').append("<td id='"+people[i-1].twitterhandle+"container'><img src='imgs/"+people[i-1].twitterhandle+".png' style='width:200px; display:block; margin:0 auto;' /><img id='"+people[i-1].twitterhandle+"heart' style='position: relative; right:0px; bottom:200px; width:50px;' src='imgs/heart.png' /> <p>"+people[i-1].twitterhandle+"</p><ul id='"+people[i-1].twitterhandle+"'></ul></td>");
+			$('#index').append("<li><a href='"+"#"+people[i-1].twitterhandle+'container'+"'>"+indexCalc(i)+". "+people[i-1].twitterhandle+"</a></li>");
 		}
 	});
+}
+function positionPins(pins){
+		console.log(pins);
+		switch (pins){
+			case 0: 
+			return("right:0; bottom:300px;");
+			break;
+			case 1: 
+			return("right:0; bottom:250px;");
+			break;
+			case 2: 
+			return("right:0; bottom:200px;");
+			break;
+		}
 }
 function peopleConcat(){
 	//var f = 0;
@@ -124,6 +142,20 @@ function peopleConcat(){
 	console.log(condition);
 	return(condition);
 }
+function indexCalc(i){
+	if(i<10)
+		return("0"+i);
+	else
+		return(i);
+
+}
+$(document).on('click', 'a[href^="#"]', function (event) {
+    event.preventDefault();
+
+    $('html, body').animate({
+        scrollTop: $($.attr(this, 'href')).offset().top
+    }, 500);
+});
 Number.prototype.map = function (in_min, in_max, out_min, out_max) {
   return (this - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
