@@ -1,5 +1,6 @@
 var people = [];
-var twitterHandles = ["katyperry", "justinbieber", "barackobama", "taylorswift13", "rihanna", "theellenshow", "ladygaga", "youtube", "cristiano", "jtimberlake", "twitter", "kimkardashian", "britneyspears", "arianagrande", "selenagomez", "cnnbrk", "ddlovato", "trump", "Trump", "POTUS"];
+var twitterHandles = ["katyperry", "justinbieber", "BarackObama", "taylorswift13", "rihanna", "TheEllenShow", "ladygaga", "YouTube", "Cristiano", "jtimberlake", "Twitter", "KimKardashian", "britneyspears", "ArianaGrande", "selenagomez", "cnnbrk", "ddlovato", "jimmyfallon", "shakira", "JLo", "realDonaldTrump", "BillGates", "nytimes", "Oprah", "KingJames", "instagram", "CNN", "BrunoMars", "MileyCyrus", "narendramodi", "NiallOfficial", "Drake", "BBCBreaking", "neymarjr", "SportsCenter", "KevinHart4real", "espn", "wizkhalifa", "LilTunechi", "onedirection", "SrBachchan", "Pink", "Harry_Styles", "iamsrk", "Louis_Tomlinson", "LiamPayne", "aliciakeys", "KAKA", "Adele", "BeingSalmanKahn"];
+var twitterNames = ["Katy Perry", "Justin Bieber", "Barack Obama", "Taylor Swift", "Rihanna", " Ellen Degeneres", "Lady Gaga", "YouTube", "Cristiano Ronaldo", "justin timberlake", "Twitter", "Kim Kardashian", "britney spears", "Ariana Grande", "selena gomez", "cnnbrk", "demi lovato", "jimmy fallon", "shakira", "JLo", "Donald Trump", "Bill Gates", "ny times", "Oprah", "lebron James", "instagram", "CNN", "Bruno Mars", "Miley Cyrus", "narendra modi", "Niall Horan", "Drake", "BBC Breaking", "neymar jr", "Sports Center", "Kevin Hart", "espn", "wiz khalifa", "Lil wayne", "one direction", "Amitabh Bachchan", "Pink", "Harry Styles", "Shah Rukh Khan", "Louis Tomlinson", "Liam Payne", "alicia keys", "Ricardo KAKA", "Adele", "Salman Kahn"];
 var condition = "";
 peopleConcat();
 // var firstNames = ["katy", "justin", "barackobama", "taylorswift13", "rihanna", "theellenshow", "ladygaga", "youtube", "cristiano", "jtimberlake", "twitter", "kimkardashian", "britneyspears", "arianagrande", "selenagomez", "cnnbrk", "ddlovato", ""];
@@ -86,7 +87,7 @@ function updateSentiment(msg,i){
 		else if(people[i].tweets[people[i].tweets.length-1].score  > 0){
 			//console.log(people[i].tweets[f].score);
 			//$('body').css("background-color", "red");
-			$('#'+people[i].twitterhandle+'heart').css("transform", 'scale('+people[i].tweets[people[i].tweets.length-1].score.map(0,10, 1, 2.5)+','+people[i].tweets[people[i].tweets.length-1].score.map(0,10, 1, 2.5)+')');
+			$('#'+people[i].twitterhandle+'heart').css("transform", 'scale('+people[i].tweets[people[i].tweets.length-1].score.map(0,10, 1, 4)+','+people[i].tweets[people[i].tweets.length-1].score.map(0,10, 1, 4)+')');
 			//$('#'+people[i].twitterhandle+'heart').css("width", '"'+50*people[i].tweets[f].score+'px !important"');
 			//$('#'+people[i].twitterhandle+'container').append("<img style='position: relative; right:0px; bottom:270px; width:50px;' src='imgs/heart.png' />");
 		}
@@ -129,9 +130,9 @@ function populatePage() {
 				$('#doll-grid').append("<tr class='table-row'></tr>");
 			}
 			console.log(people[i-1]);
-			$('.table-row:last-child').append("<td id='"+people[i-1].twitterhandle+"container'><img src='imgs/voodoo.png' style='width:200px; display:block; margin:0 auto;' /><img id='"+people[i-1].twitterhandle+"heart' style='position: relative; right:0px; bottom:190px; width:30px;' src='imgs/heart.png' /> <p>"+people[i-1].twitterhandle+"</p><ul id='"+people[i-1].twitterhandle+"' style='height:0px; margin:0px;'></ul></td>");
+			$('.table-row:last-child').append("<td id='"+people[i-1].twitterhandle+"container'><img src='imgs/"+people[i-1].twitterhandle+".png' style='width:200px; display:block; margin:0 auto;' /><img id='"+people[i-1].twitterhandle+"heart' style='position: relative; right:0px; bottom:190px; width:30px;' src='imgs/heart.png' /> <p>"+twitterNames[i-1]+"</p><ul id='"+people[i-1].twitterhandle+"' style='height:0px; margin:0px;'></ul></td>");
 			// $('.table-row:last-child').append("<td id='"+people[i-1].twitterhandle+"container'><img src='imgs/"+people[i-1].twitterhandle+".png' style='width:200px; display:block; margin:0 auto;' /><img id='"+people[i-1].twitterhandle+"heart' style='position: relative; right:0px; bottom:200px; width:50px;' src='imgs/heart.png' /> <p>"+people[i-1].twitterhandle+"</p><ul id='"+people[i-1].twitterhandle+"'></ul></td>");
-			$('#index').append("<li><a href='"+"#"+people[i-1].twitterhandle+'container'+"'>"+indexCalc(i)+". "+people[i-1].twitterhandle+"</a></li>");
+			$('#index').append("<li><a href='"+"#"+people[i-1].twitterhandle+'container'+"'>"+indexCalc(i)+". "+twitterNames[i-1]+"</a></li>");
 		}
 	});
 }
@@ -140,25 +141,25 @@ function positionPins(pins, i){
 		console.log(pins);
 		switch (pins){
 			case 0: 
-			return("left:0px; bottom:360px;");
+			return("left:-20px; bottom:280px;");
 			break;
 			case 1: 
 			//$("#Trumppins").css("transform", "rotate(90deg)");
 			// $("#Trumppins").css("width", "200px");
 			// $("#"+person.twitterhandle+"pins").css("transform", "rotate(90deg)");
-			return("left:15px; bottom:120px;");
+			return("left:-35px; bottom:120px;");
 			break;
 			case 2: 
-			return("left:35px; bottom:175px;");
+			return("left:-15px; bottom:165px;");
 			break;
 			case 3: 
-			return("left:30px; bottom:325px;");
+			return("left:-25px; bottom:315px;");
 			break;
 			case 4: 
-			return("left:-100px; bottom:225px;");
+			return("left:50px; bottom:225px;");
 			break;
 			case 5: 
-			return("left:-20px; bottom:320px;");
+			return("left:-10px; bottom:330px;");
 			break;
 			default:
 			$('#'+people[i].twitterhandle+'container '+'.extrapincount').remove();
