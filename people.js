@@ -1,6 +1,6 @@
 var people = [];
 var twitterHandles = ["katyperry", "justinbieber", "BarackObama", "taylorswift13", "rihanna", "TheEllenShow", "ladygaga", "YouTube", "Cristiano", "jtimberlake", "Twitter", "KimKardashian", "britneyspears", "ArianaGrande", "selenagomez", "cnnbrk", "ddlovato", "jimmyfallon", "shakira", "JLo", "realDonaldTrump", "BillGates", "nytimes", "Oprah", "KingJames", "instagram", "CNN", "BrunoMars", "MileyCyrus", "narendramodi", "NiallOfficial", "Drake", "BBCBreaking", "neymarjr", "SportsCenter", "KevinHart4real", "espn", "wizkhalifa", "LilTunechi", "onedirection", "SrBachchan", "Pink", "Harry_Styles", "iamsrk", "Louis_Tomlinson", "LiamPayne", "aliciakeys", "KAKA", "Adele", "BeingSalmanKahn"];
-var twitterNames = ["Katy Perry", "Justin Bieber", "Barack Obama", "Taylor Swift", "Rihanna", " Ellen Degeneres", "Lady Gaga", "YouTube", "Cristiano Ronaldo", "justin timberlake", "Twitter", "Kim Kardashian", "britney spears", "Ariana Grande", "selena gomez", "cnnbrk", "demi lovato", "jimmy fallon", "shakira", "JLo", "Donald Trump", "Bill Gates", "ny times", "Oprah", "lebron James", "instagram", "CNN", "Bruno Mars", "Miley Cyrus", "narendra modi", "Niall Horan", "Drake", "BBC Breaking", "neymar jr", "Sports Center", "Kevin Hart", "espn", "wiz khalifa", "Lil wayne", "one direction", "Amitabh Bachchan", "Pink", "Harry Styles", "Shah Rukh Khan", "Louis Tomlinson", "Liam Payne", "alicia keys", "Ricardo KAKA", "Adele", "Salman Kahn"];
+var twitterNames = ["Katy Perry", "Justin Bieber", "Barack Obama", "Taylor Swift", "Rihanna", " Ellen Degeneres", "Lady Gaga", "YouTube", "Cristiano Ronaldo", "Justin Timberlake", "Twitter", "Kim Kardashian", "Britney Spears", "Ariana Grande", "Selena Gomez", "CNNbrk", "Demi Lovato", "Jimmy Fallon", "Shakira", "JLo", "Donald Trump", "Bill Gates", "NY times", "Oprah", "Lebron James", "Instagram", "CNN", "Bruno Mars", "Miley Cyrus", "Narendra Modi", "Niall Horan", "Drake", "BBC Breaking", "Neymar Jr", "Sports Center", "Kevin Hart", "ESPN", "Wiz Khalifa", "Lil Wayne", "One Direction", "Amitabh Bachchan", "Pink", "Harry Styles", "Shah Rukh Khan", "Louis Tomlinson", "Liam Payne", "Alicia Keys", "Ricardo KAKA", "Adele", "Salman Kahn"];
 var condition = "";
 peopleConcat();
 // var firstNames = ["katy", "justin", "barackobama", "taylorswift13", "rihanna", "theellenshow", "ladygaga", "youtube", "cristiano", "jtimberlake", "twitter", "kimkardashian", "britneyspears", "arianagrande", "selenagomez", "cnnbrk", "ddlovato", ""];
@@ -130,7 +130,7 @@ function populatePage() {
 				$('#doll-grid').append("<tr class='table-row'></tr>");
 			}
 			console.log(people[i-1]);
-			$('.table-row:last-child').append("<td id='"+people[i-1].twitterhandle+"container'><img src='imgs/"+people[i-1].twitterhandle+".png' style='width:200px; display:block; margin:0 auto;' /><img id='"+people[i-1].twitterhandle+"heart' style='position: relative; right:0px; bottom:190px; width:30px;' src='imgs/heart.png' /> <p>"+twitterNames[i-1]+"</p><ul id='"+people[i-1].twitterhandle+"' style='height:0px; margin:0px;'></ul></td>");
+			$('.table-row:last-child').append("<td id='"+people[i-1].twitterhandle+"container'><img src='imgs/"+people[i-1].twitterhandle+".jpg' style='width:250px; display:block; margin:0 auto; clip: rect(0px,300px,60px,0px);' /><img id='"+people[i-1].twitterhandle+"heart' style='position: relative; right:0px; bottom:190px; width:30px;' src='imgs/heart.png' /> <p style='position:relative; top:-35px;'>"+twitterNames[i-1]+"</p><ul id='"+people[i-1].twitterhandle+"' style='height:0px; margin:0px;'></ul></td>");
 			// $('.table-row:last-child').append("<td id='"+people[i-1].twitterhandle+"container'><img src='imgs/"+people[i-1].twitterhandle+".png' style='width:200px; display:block; margin:0 auto;' /><img id='"+people[i-1].twitterhandle+"heart' style='position: relative; right:0px; bottom:200px; width:50px;' src='imgs/heart.png' /> <p>"+people[i-1].twitterhandle+"</p><ul id='"+people[i-1].twitterhandle+"'></ul></td>");
 			$('#index').append("<li><a href='"+"#"+people[i-1].twitterhandle+'container'+"'>"+indexCalc(i)+". "+twitterNames[i-1]+"</a></li>");
 		}
@@ -141,25 +141,25 @@ function positionPins(pins, i){
 		console.log(pins);
 		switch (pins){
 			case 0: 
-			return("left:-20px; bottom:280px;");
+			return("left:25px; bottom:285px;");
 			break;
 			case 1: 
 			//$("#Trumppins").css("transform", "rotate(90deg)");
 			// $("#Trumppins").css("width", "200px");
 			// $("#"+person.twitterhandle+"pins").css("transform", "rotate(90deg)");
-			return("left:-35px; bottom:120px;");
+			return("left:-5px; bottom:150px;");
 			break;
 			case 2: 
-			return("left:-15px; bottom:165px;");
+			return("left:5px; bottom:165px;");
 			break;
 			case 3: 
-			return("left:-25px; bottom:315px;");
+			return("left:-10px; bottom:315px;");
 			break;
 			case 4: 
-			return("left:50px; bottom:225px;");
+			return("left:60px; bottom:240px;");
 			break;
 			case 5: 
-			return("left:-10px; bottom:330px;");
+			return("left:14px; bottom:335px;");
 			break;
 			default:
 			$('#'+people[i].twitterhandle+'container '+'.extrapincount').remove();

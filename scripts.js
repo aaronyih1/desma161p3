@@ -60,6 +60,6 @@
       function processData(data) {
         //console.log(data);
         // overallSentimentScore += data.score;
-        document.querySelector('#feed').innerHTML = data.text;
+        document.querySelector('#feed').innerHTML ="<table><tr><td><img src='imgs/black-twitter.png' style='width:30px; vertical-align:middle;'/></td><td><p>"+ data.text+"</p></td></tr></table>";
         // document.querySelector('#sentiment-score').innerHTML = data.score;
       }
